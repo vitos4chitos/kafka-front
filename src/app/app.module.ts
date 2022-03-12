@@ -11,15 +11,14 @@ import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {TabMenuModule} from 'primeng/tabmenu';
 import {RouterModule, Router} from '@angular/router';
-import {AddDocumentComponent } from './modal/add-document/add-document.component';
+import {ModalModule} from "./modal/modal.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     StartPageComponent,
     AuthUserComponent,
-    RegistUserComponent,
-    AddDocumentComponent
+    RegistUserComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +27,8 @@ import {AddDocumentComponent } from './modal/add-document/add-document.component
     RippleModule,
     ButtonModule,
     TabMenuModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([]),
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

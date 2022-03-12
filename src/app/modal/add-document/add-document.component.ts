@@ -6,17 +6,19 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./add-document.component.css']
 })
 export class AddDocumentComponent implements OnInit {
+
   names: string[];
-  selectName: string;
+  selectedName: string = '';
 
   constructor() {
-
     this.names = [
+      'В',
       'Виктор',
       'Дмитрий',
-      'Владимир'
+      'Александр',
+      'Владимир',
+      'длиннаястрокадлиннаястрокадлиннаястрокадлиннаястрока'
     ];
-    this.selectName = this.names[0];
   }
 
   ngOnInit(): void {

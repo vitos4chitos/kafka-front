@@ -14,6 +14,7 @@ root {
 .wrapper {
   width: 25%;
   margin: 0 auto;
+  margin-top: 5%;
 }
 
 .font-medium {
@@ -32,6 +33,12 @@ root {
   justify-content: space-around;
   margin-bottom: 3em !important;
 }
+
+.p-dropdown{
+  width: 100%;
+  border-radius: 50px !important;
+}
+
 
 @media screen and (min-width: 992px) {
   .wrapper > * {
