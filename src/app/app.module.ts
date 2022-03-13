@@ -12,13 +12,23 @@ import {ButtonModule} from "primeng/button";
 import {TabMenuModule} from 'primeng/tabmenu';
 import {RouterModule, Router} from '@angular/router';
 import {ModalModule} from "./modal/modal.module";
+import { RegistOfficcialComponent } from './regist-officcial/regist-officcial.component';
+import { MainUPageComponent } from './main-u-page/main-u-page.component';
+import { UserQueueComponent } from './user-queue/user-queue.component';
+import { UserDocsComponent } from './user-docs/user-docs.component';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartPageComponent,
     AuthUserComponent,
-    RegistUserComponent
+    RegistUserComponent,
+    RegistOfficcialComponent,
+    MainUPageComponent,
+    UserQueueComponent,
+    UserDocsComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,
