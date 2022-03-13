@@ -6,11 +6,13 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {FormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MedCertifComponent } from './med-certif/med-certif.component'
 
 @NgModule({
   declarations: [
-    AddDocumentComponent
+    AddDocumentComponent,
+    MedCertifComponent
   ],
   imports: [
     CommonModule,
@@ -21,8 +23,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     FormsModule,
     BrowserAnimationsModule
   ],
-  exports:[
-    AddDocumentComponent
+  exports: [
+    AddDocumentComponent,
+    MedCertifComponent
   ]
 })
 export class ModalModule { }
