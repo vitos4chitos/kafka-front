@@ -28,7 +28,9 @@ const appRoutes: Routes = [
   {path: "mainU", component: MainUPageComponent},
   {path: "registO", component: RegistOfficcialComponent},
   {path: "registU", component: RegistUserComponent},
+  {path: "registdock", component: RegistUserComponent},
   {path: "**", component: PageNotFoundComponent}
+
 ]
 
 @NgModule({

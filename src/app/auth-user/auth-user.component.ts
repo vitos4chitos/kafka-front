@@ -4,6 +4,7 @@ import {User} from "../services/interfaces";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MainService} from "../services/main.serv";
 import {AuthService} from "../services/auth.serv";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth-user',
@@ -23,7 +24,7 @@ export class AuthUserComponent implements OnInit {
     login: string;
     password: string;
   }
-  constructor(private auth: AuthService, private mainServer: MainService) { }
+  constructor(private auth: AuthService, private mainServer: MainService, private router: Router) { }
   ngOnInit() {
     this.items = [
       {label: 'Пользователь'},
@@ -44,13 +45,13 @@ export class AuthUserComponent implements OnInit {
         login: this.username,
         password: this.password
       };
-      // this.mainServer.setCurrentUser(this.user.login);
-      // localStorage.setItem("user", this.mainServer.currentUser);
+      this.mainServer.setCurrentUser(this.user.login);
+      localStorage.setItem("user", this.mainServer.currentUser);
       console.log(this.user.login);
       this.auth.login(this.user);
     }
     else{
-      console.log("была нажата кнопка регестрации")
+      this.router.navigateByUrl("registU");
     }
   }
 }

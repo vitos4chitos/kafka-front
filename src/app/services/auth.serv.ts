@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from "./interfaces";
+import {UserToReg} from "./user.reg";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 
@@ -18,9 +19,16 @@ export class AuthService {
     console.log(user.login)
     this.http.post(this.url_auth, user).subscribe(
       (res: any) => {
-        console.log(res);
-      }
-    );
+      if (res["token"] !== "bad") {
+        this.setToken(res['token']);
+        this.router.navigateByUrl("mainU");
+      } else
+        alert("Неправильный логин или пароль");
+    },
+    error => {
+      alert("Что-то не так с сервером, попробуйте позже")
+    }
+  );
 
   }
 
@@ -47,13 +55,13 @@ export class AuthService {
     localStorage.setItem('token', this.token);
   }
 
-  reg(user: User) {
+  reg(user: UserToReg) {
     this.http.post(this.url_reg, user).subscribe(
       (res: any) => {
         if (res["token"] !== "bad") {
           if (res["token"] !== "connection error") {
             this.setToken(res['token']);
-            this.router.navigateByUrl("/main");
+            this.router.navigateByUrl("main");
           } else {
             alert("Что-то не так с сервером, попробуйте позже");
           }
