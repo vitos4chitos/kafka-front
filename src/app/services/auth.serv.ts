@@ -61,7 +61,7 @@ export class AuthService {
         if (res["token"] !== "bad") {
           if (res["token"] !== "connection error") {
             this.setToken(res['token']);
-            this.router.navigateByUrl("main");
+            this.router.navigateByUrl("registdock");
           } else {
             alert("Что-то не так с сервером, попробуйте позже");
           }

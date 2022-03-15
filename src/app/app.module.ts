@@ -21,6 +21,7 @@ import { ShopComponent } from './shop/shop.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {AddDocumentComponent} from "./modal/add-document/add-document.component";
 
 const appRoutes: Routes = [
   {path: "", component: StartPageComponent},
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
   {path: "mainU", component: MainUPageComponent},
   {path: "registO", component: RegistOfficcialComponent},
   {path: "registU", component: RegistUserComponent},
-  {path: "registdock", component: RegistUserComponent},
+  {path: "registdock", component: AddDocumentComponent},
   {path: "**", component: PageNotFoundComponent}
 
 ]
