@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {User} from "../services/interfaces";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MainService} from "../services/main.serv";
+import {AuthService} from "../services/auth.serv";
 
 @Component({
   selector: 'app-auth-user',
@@ -8,11 +12,18 @@ import {MenuItem} from "primeng/api";
 })
 
 export class AuthUserComponent implements OnInit {
-
   items: MenuItem[] = [];
 
   activeItem: MenuItem = {};
 
+  username: string;
+  password: string;
+
+  user:{
+    login: string;
+    password: string;
+  }
+  constructor(private auth: AuthService, private mainServer: MainService) { }
   ngOnInit() {
     this.items = [
       {label: 'Пользователь'},
@@ -20,6 +31,27 @@ export class AuthUserComponent implements OnInit {
     ];
 
     this.activeItem = this.items[0];
+  }
+
+  onSubmit(data: string) {
+    if(data === 'LogIn'){
+
+      // @ts-ignore
+      this.username = document.getElementById("email1").value;
+      // @ts-ignore
+      this.password = document.getElementById("password1").value;
+      this.user = {
+        login: this.username,
+        password: this.password
+      };
+      // this.mainServer.setCurrentUser(this.user.login);
+      // localStorage.setItem("user", this.mainServer.currentUser);
+      console.log(this.user.login);
+      this.auth.login(this.user);
+    }
+    else{
+      console.log("была нажата кнопка регестрации")
+    }
   }
 }
 

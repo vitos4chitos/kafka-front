@@ -19,6 +19,8 @@ import { UserQueueComponent } from './user-queue/user-queue.component';
 import { UserDocsComponent } from './user-docs/user-docs.component';
 import { ShopComponent } from './shop/shop.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   {path: "", component: StartPageComponent},
@@ -50,7 +52,9 @@ const appRoutes: Routes = [
     ButtonModule,
     TabMenuModule,
     RouterModule.forRoot(appRoutes),
-    ModalModule
+    FormsModule,
+    ModalModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
