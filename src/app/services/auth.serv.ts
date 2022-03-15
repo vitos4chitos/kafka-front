@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from "./interfaces";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 
@@ -12,10 +12,11 @@ export class AuthService {
 
   url_auth = "http://localhost:8080/auth";
   url_reg = "http://localhost:8080/reg"
-  private token:string = '';
-  login(user: User){
+  private token: string = '';
+
+  login(user: User) {
     console.log(user.login)
-    this.http.get(this.url_auth).subscribe(
+    this.http.post(this.url_auth, user).subscribe(
       (res: any) => {
         console.log(res);
       }
@@ -29,11 +30,11 @@ export class AuthService {
     this.token = '';
   }
 
-  constructor(private http: HttpClient,  private router: Router){
+  constructor(private http: HttpClient, private router: Router) {
 
   }
 
-  isTokenExpired() :boolean{
+  isTokenExpired(): boolean {
     return this.token !== '';
   }
 
@@ -41,20 +42,19 @@ export class AuthService {
     return localStorage.getItem("token");
   }
 
-  setToken(token: string){
+  setToken(token: string) {
     this.token = token;
     localStorage.setItem('token', this.token);
   }
 
-  reg(user: User){
+  reg(user: User) {
     this.http.post(this.url_reg, user).subscribe(
       (res: any) => {
         if (res["token"] !== "bad") {
-          if(res["token"] !== "connection error") {
+          if (res["token"] !== "connection error") {
             this.setToken(res['token']);
             this.router.navigateByUrl("/main");
-          }
-          else{
+          } else {
             alert("Что-то не так с сервером, попробуйте позже");
           }
         } else
