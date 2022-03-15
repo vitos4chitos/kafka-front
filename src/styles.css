@@ -51,3 +51,11 @@ root {
     width: 40% !important;
   }
 }
+
+.container{
+  background-image: url(./assets/img.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}

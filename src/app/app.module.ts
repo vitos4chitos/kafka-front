@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppComponent } from './app.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { RegistUserComponent } from './regist-user/regist-user.component';
@@ -10,13 +11,23 @@ import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {TabMenuModule} from 'primeng/tabmenu';
-import {RouterModule, Router} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {ModalModule} from "./modal/modal.module";
 import { RegistOfficcialComponent } from './regist-officcial/regist-officcial.component';
 import { MainUPageComponent } from './main-u-page/main-u-page.component';
 import { UserQueueComponent } from './user-queue/user-queue.component';
 import { UserDocsComponent } from './user-docs/user-docs.component';
 import { ShopComponent } from './shop/shop.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+const appRoutes: Routes = [
+  {path: "", component: StartPageComponent},
+  {path: "auth", component: AuthUserComponent},
+  {path: "mainU", component: MainUPageComponent},
+  {path: "registO", component: RegistOfficcialComponent},
+  {path: "registU", component: RegistUserComponent},
+  {path: "**", component: PageNotFoundComponent}
+]
 
 @NgModule({
   declarations: [
@@ -28,7 +39,8 @@ import { ShopComponent } from './shop/shop.component';
     MainUPageComponent,
     UserQueueComponent,
     UserDocsComponent,
-    ShopComponent
+    ShopComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +49,7 @@ import { ShopComponent } from './shop/shop.component';
     RippleModule,
     ButtonModule,
     TabMenuModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot(appRoutes),
     ModalModule
   ],
   providers: [],
