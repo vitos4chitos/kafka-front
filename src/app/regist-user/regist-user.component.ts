@@ -26,8 +26,9 @@ export class RegistUserComponent implements OnInit {
     name: string;
     surname: string;
     money: number;
+    role: string;
+    active: boolean;
     date: Date;
-    time: Time;
   }
 
   ngOnInit(): void {
@@ -54,13 +55,13 @@ export class RegistUserComponent implements OnInit {
         name: this.name,
         surname: this.surname,
         money: this.money,
+        role: 'user',
+        active: true,
         date: this.date,
-        time: this.time
       };
       this.mainServer.setCurrentUser(this.user.username);
       localStorage.setItem("user", this.mainServer.currentUser);
       console.log(this.user.date);
-      console.log(this.user.time);
       this.auth.reg(this.user)
     }
   }

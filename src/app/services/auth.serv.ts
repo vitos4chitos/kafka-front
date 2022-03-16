@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {User} from "./interfaces";
 import {UserToReg} from "./user.reg";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Dockument} from "./dock.reg"
+import {DocumentPrior} from "./dock.prior";
 import {Router} from "@angular/router";
 
 
@@ -12,23 +14,26 @@ import {Router} from "@angular/router";
 export class AuthService {
 
   url_auth = "http://localhost:8080/auth";
-  url_reg = "http://localhost:8080/reg"
+  url_reg = "http://localhost:8080/signUp"
+  url_dock = "http://localhost:8080/document/addDocument"
+  url_prior = "http://localhost:8080/document/addDocumentPrior"
+  user_id: number;
   private token: string = '';
 
   login(user: User) {
     console.log(user.login)
     this.http.post(this.url_auth, user).subscribe(
       (res: any) => {
-      if (res["token"] !== "bad") {
-        this.setToken(res['token']);
-        this.router.navigateByUrl("mainU");
-      } else
-        alert("Неправильный логин или пароль");
-    },
-    error => {
-      alert("Что-то не так с сервером, попробуйте позже")
-    }
-  );
+        if (res["token"] !== "bad") {
+          this.setToken(res['token']);
+          this.router.navigateByUrl("mainU");
+        } else
+          alert("Неправильный логин или пароль");
+      },
+      error => {
+        alert("Что-то не так с сервером, попробуйте позже")
+      }
+    );
 
   }
 
@@ -58,15 +63,42 @@ export class AuthService {
   reg(user: UserToReg) {
     this.http.post(this.url_reg, user).subscribe(
       (res: any) => {
-        if (res["token"] !== "bad") {
-          if (res["token"] !== "connection error") {
-            this.setToken(res['token']);
-            this.router.navigateByUrl("registdock");
-          } else {
-            alert("Что-то не так с сервером, попробуйте позже");
-          }
+        if (res["token"] !== "err") {
+          this.router.navigateByUrl("registdock");
         } else
-          alert("Пользователь с таким именем уже существует");
+          alert("Неправильный логин или пароль");
+      },
+      error => {
+        alert("Что-то не так с сервером, попробуйте позже")
+      }
+    );
+  }
+
+  addDock(dock: Dockument) {
+    console.log(dock.login)
+    console.log(dock.date1)
+    console.log(dock.date2)
+    console.log(dock.name)
+    this.http.post(this.url_dock, dock).subscribe(
+      (res: any) => {
+        if (res["token"] !== "err") {
+          this.router.navigateByUrl("registdock");
+        } else
+          alert("Что-то ввели не то");
+      },
+      error => {
+        alert("Что-то не так с сервером, попробуйте позже")
+      }
+    );
+  }
+
+  addPrior(dock: DocumentPrior){
+    this.http.post(this.url_prior, dock).subscribe(
+      (res: any) => {
+        if (res["token"] !== "err") {
+          this.router.navigateByUrl("registdock");
+        } else
+          alert("Что-то ввели не то");
       },
       error => {
         alert("Что-то не так с сервером, попробуйте позже")

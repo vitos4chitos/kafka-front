@@ -24,7 +24,7 @@ export class AuthUserComponent implements OnInit {
     login: string;
     password: string;
   }
-  constructor(private auth: AuthService, private mainServer: MainService, private router: Router) { }
+  constructor(private auth: AuthService, private mainServer: MainService, private router: Router){}
   ngOnInit() {
     this.items = [
       {label: 'Пользователь'},

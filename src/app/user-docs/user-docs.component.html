@@ -1,1 +1,17 @@
-<p>user-docs works!</p>
+<div id="result_table">
+  <table align="center" id = "table">
+    <tr>
+      <th class="col1">Название</th>
+      <th class="col1">Дата получения</th>
+      <th class="col1">Срок действия</th>
+      <th class="col1">Кем выдано</th>
+    </tr>
+    <tr *ngFor="let point of rows">
+      <td class="col1">{{point.name}}</td>
+      <td class="col1">{{point.date1}}</td>
+      <td class="col1">{{point.date2}}</td>
+      <td class="columns">{{point.bywho}}</td>
+    </tr>
+  </table>
+</div>
+

@@ -6,6 +6,7 @@ export interface UserToReg{
   name: string;
   surname: string;
   money: number;
-  date: Date;
-  time: Time;
+  role: string,
+  active: boolean,
+  date: Date
 }

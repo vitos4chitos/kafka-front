@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AddDocumentComponent} from "./modal/add-document/add-document.component";
+import {MedCertifComponent} from "./modal/med-certif/med-certif.component";
 
 const appRoutes: Routes = [
   {path: "", component: StartPageComponent},
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   {path: "registO", component: RegistOfficcialComponent},
   {path: "registU", component: RegistUserComponent},
   {path: "registdock", component: AddDocumentComponent},
+  {path: "registprimes", component: MedCertifComponent},
   {path: "**", component: PageNotFoundComponent}
 
 ]
