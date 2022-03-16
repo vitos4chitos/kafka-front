@@ -13,18 +13,25 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 })
 export class UserDocsComponent implements OnInit {
   rows: UserDoc[] = [];
-  url = ""
+  url = "http://localhost:8080/document/getAll"
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
-  ngOnInit(): void {
-
+  ngOnInit(){
+    this.getExistingValues(<string>localStorage.getItem("user")).subscribe(values => {
+      console.log(this.rows.toString());
+      this.rows = values;
+    });
   }
 
   getExistingValues(username: string): Observable<UserDoc[]> {
     let params = new HttpParams().set("login", username);
-    return this.http.get<any>(this.url, {params: params}).pipe(map(points => points.map(function (point:any) {
-      return new UserDoc(point["name"], point["date1"], point["date2"], point["date3"]);
+    return this.http.get<any>(this.url, {params: params}).pipe(map(points => points.map(function (point: any) {
+      console.log(point["issued_by_whom"]);
+      return new UserDoc(point["id"], point["name"], point["issue"], point["validity"], point["bywhom"]);
     })));
+  }
+  onClick(id: number){
+    console.log(id);
   }
 
 }

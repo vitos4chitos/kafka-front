@@ -1,12 +1,14 @@
 <div id="result_table">
   <table align="center" id = "table">
     <tr>
+      <th class="col1">Id</th>
       <th class="col1">Название</th>
       <th class="col1">Дата получения</th>
       <th class="col1">Срок действия</th>
       <th class="col1">Кем выдано</th>
     </tr>
-    <tr *ngFor="let point of rows">
+    <tr *ngFor="let point of rows" (click)="onClick(point.id)">
+      <td class="col1">{{point.id}}</td>
       <td class="col1">{{point.name}}</td>
       <td class="col1">{{point.date1}}</td>
       <td class="col1">{{point.date2}}</td>
