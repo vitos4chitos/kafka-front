@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {UserDoc} from "../user-docs/user.doc";
+import {AuthService} from "../services/auth.serv";
+import {MainService} from "../services/main.serv";
+import {Router} from "@angular/router";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {map, Observable} from "rxjs";
+import {UserPodpicy} from "./user.podpicy";
 
 @Component({
   selector: 'app-shop',
@@ -6,10 +13,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
+  rows: UserPodpicy[] = [];
+  url = "http://localhost:8080/document/getPod"
+  constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
-  constructor() { }
+  ngOnInit(){
+    this.getExistingValues(<string>localStorage.getItem("user")).subscribe(values => {
+      console.log(this.rows.toString());
+      this.rows = values;
+    });
+  }
 
-  ngOnInit(): void {
+  getExistingValues(username: string): Observable<UserPodpicy[]> {
+    let params = new HttpParams().set("login", username);
+    return this.http.get<any>(this.url, {params: params}).pipe(map(points => points.map(function (point: any) {
+      console.log(point["issued_by_whom"]);
+      return new UserPodpicy(point["id"], point["name"], point["instnance"]);
+    })));
+  }
+  onClick(id: number){
+    console.log(id);
   }
 
 }

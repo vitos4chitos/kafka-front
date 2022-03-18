@@ -1,1 +1,14 @@
-<p>shop works!</p>
+<div id="result_table">
+  <table align="center" id = "table">
+    <tr>
+      <th class="col1">Id</th>
+      <th class="col1">Название</th>
+      <th class="col1">Номер инстации</th>
+    </tr>
+    <tr *ngFor="let point of rows" (click)="onClick(point.id)">
+      <td class="col1">{{point.id}}</td>
+      <td class="col1">{{point.name}}</td>
+      <td class="col1">{{point.instance}}</td>
+    </tr>
+  </table>
+</div>
