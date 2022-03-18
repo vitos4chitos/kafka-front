@@ -33,6 +33,7 @@ const appRoutes: Routes = [
   {path: "registdock", component: AddDocumentComponent},
   {path: "registprimes", component: MedCertifComponent},
   {path: "documents", component: UserDocsComponent},
+  {path: "queues", component: UserQueueComponent},
   {path: "**", component: PageNotFoundComponent}
 
 ]

@@ -58,6 +58,7 @@ export class MedCertifComponent implements OnInit {
   }
 
   nextStep(){
+
     this.router.navigateByUrl("mainU");
   }
 }

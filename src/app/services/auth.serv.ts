@@ -64,6 +64,7 @@ export class AuthService {
     this.http.post(this.url_reg, user).subscribe(
       (res: any) => {
         if (res["token"] !== "err") {
+          this.setToken("true");
           this.router.navigateByUrl("registdock");
         } else
           alert("Неправильный логин или пароль");
