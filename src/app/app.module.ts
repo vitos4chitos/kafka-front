@@ -34,6 +34,7 @@ const appRoutes: Routes = [
   {path: "registprimes", component: MedCertifComponent},
   {path: "documents", component: UserDocsComponent},
   {path: "queues", component: UserQueueComponent},
+  {path: "shop", component: ShopComponent},
   {path: "**", component: PageNotFoundComponent}
 
 ]

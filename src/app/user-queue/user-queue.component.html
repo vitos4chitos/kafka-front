@@ -1,18 +1,26 @@
-<div id="result_table">
-  <table align="center" id = "table">
-    <tr>
-      <th class="col1">Id</th>
-      <th class="col1">Имя Чиновника</th>
-      <th class="col1">Время приема</th>
-      <th class="col1">Место в очереди</th>
-      <th class="col1">Приоритет</th>
-    </tr>
-    <tr *ngFor="let point of rows" (click)="onClick(point.id)">
-      <td class="col1">{{point.id}}</td>
-      <td class="col1">{{point.ofName}}</td>
-      <td class="col1">{{point.time}}</td>
-      <td class="col1">{{point.place}}</td>
-      <td class="columns">{{point.priority}}</td>
-    </tr>
-  </table>
+<div>
+  <div class = "header">
+    <button pButton type="button" id = "exit" label="Выйти" class="p-button-raised p-button-rounded p-button" (click)="logOut()"></button>
+  </div>
+  <div class = "headerr">
+    <button pButton type="button" id = "back" label="Назад" class="p-button-raised p-button-rounded p-button" (click)="back()"></button>
+  </div>
+  <div id="result_table">
+    <table align="center" id = "table">
+      <tr>
+        <th class="col1">Id</th>
+        <th class="col1">Имя Чиновника</th>
+        <th class="col1">Время приема</th>
+        <th class="col1">Место в очереди</th>
+        <th class="col1">Приоритет</th>
+      </tr>
+      <tr *ngFor="let point of rows" (click)="onClick(point.id)">
+        <td class="col1">{{point.id}}</td>
+        <td class="col1">{{point.ofName}}</td>
+        <td class="col1">{{point.time}}</td>
+        <td class="col1">{{point.place}}</td>
+        <td class="columns">{{point.priority}}</td>
+      </tr>
+    </table>
+  </div>
 </div>

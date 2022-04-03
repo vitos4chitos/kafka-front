@@ -25,7 +25,8 @@ export class AuthService {
     this.http.post(this.url_auth, user).subscribe(
       (res: any) => {
         if (res["token"] !== "bad") {
-          this.setToken(res['token']);
+          localStorage.setItem('token', user.password);
+          localStorage.setItem('user', user.login);
           this.router.navigateByUrl("mainU");
         } else
           alert("Неправильный логин или пароль");
@@ -39,8 +40,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem("token");
-    this.router.navigateByUrl("/start");
-    this.token = '';
+    localStorage.removeItem("user");
+    this.router.navigateByUrl("");
   }
 
   constructor(private http: HttpClient, private router: Router) {
@@ -106,4 +107,34 @@ export class AuthService {
       }
     );
   }
-}
+
+  checkToken(){
+    let username;
+    let user;
+    let password;
+    if (localStorage.getItem("user") == undefined || localStorage.getItem("token") == undefined) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      this.router.navigateByUrl("");
+    } else {
+      username = localStorage.getItem("user");
+      password = localStorage.getItem("token");
+      user = {
+        login: username,
+        password: password
+      };
+      this.http.post(this.url_auth, user).subscribe(
+        (res: any) => {
+          if (res["token"] !== "true") {
+            this.router.navigateByUrl("");
+          }
+        },
+        error => {
+          alert("Что-то не так с сервером, попробуйте позже")
+        }
+      );
+    }
+
+    }
+  }
+

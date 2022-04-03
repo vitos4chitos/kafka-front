@@ -19,6 +19,7 @@ export class UserQueueComponent implements OnInit {
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
   ngOnInit(){
+    this.auth.checkToken()
     this.getExistingValues(<string>localStorage.getItem("user")).subscribe(values => {
       console.log(this.rows.toString());
       this.rows = values;
@@ -34,6 +35,14 @@ export class UserQueueComponent implements OnInit {
   }
   onClick(id: number){
     console.log(id);
+  }
+
+  back(){
+    this.router.navigateByUrl("mainU")
+  }
+
+  logOut(){
+    this.auth.logout();
   }
 
 }
