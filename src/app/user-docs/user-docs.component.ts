@@ -29,9 +29,12 @@ export class UserDocsComponent implements OnInit {
     return this.http.get<any>(this.url, {params: params}).pipe(map(points => points.map(function (point: any) {
       console.log(point["issued_by_whom"]);
       return new UserDoc(point["id"], point["name"], point["issue"], point["validity"], point["bywhom"]);
-    })));
+    }
+    )));
   }
   onClick(id: number){
+    localStorage.setItem('documentid', String(id));
+    this.router.navigateByUrl("document");
     console.log(id);
   }
   back(){
