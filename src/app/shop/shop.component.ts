@@ -33,6 +33,8 @@ export class ShopComponent implements OnInit {
   }
   onClick(id: String){
     console.log(id);
+    localStorage.setItem("type", String(id))
+    this.router.navigateByUrl("shops");
   }
   back(){
     this.router.navigateByUrl("mainU")
