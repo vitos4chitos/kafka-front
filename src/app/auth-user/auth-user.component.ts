@@ -36,7 +36,6 @@ export class AuthUserComponent implements OnInit {
 
   onSubmit(data: string) {
     if(data === 'LogIn'){
-
       // @ts-ignore
       this.username = document.getElementById("email1").value;
       // @ts-ignore
