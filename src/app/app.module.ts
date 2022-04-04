@@ -23,6 +23,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AddDocumentComponent} from "./modal/add-document/add-document.component";
 import {MedCertifComponent} from "./modal/med-certif/med-certif.component";
+import {TableModule} from "primeng/table";
 
 const appRoutes: Routes = [
   {path: "", component: StartPageComponent},
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     ModalModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
