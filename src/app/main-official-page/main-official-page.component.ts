@@ -13,7 +13,7 @@ import {SortEvent} from "primeng/api";
 export class MainOfficialPageComponent implements OnInit {
 
   //todo
-  customers: Customer[] = [];
+  //customers: Customer[] = [];
 
   // constructor(private productService: ProductService) { }
 
