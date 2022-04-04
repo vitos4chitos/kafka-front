@@ -24,6 +24,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {AddDocumentComponent} from "./modal/add-document/add-document.component";
 import {MedCertifComponent} from "./modal/med-certif/med-certif.component";
 import {TableModule} from "primeng/table";
+import { UserDockComponent } from './user-dock/user-dock.component';
+import { WhereICanBuyComponent } from './where-i-can-buy/where-i-can-buy.component';
 
 const appRoutes: Routes = [
   {path: "", component: StartPageComponent},
@@ -36,6 +38,8 @@ const appRoutes: Routes = [
   {path: "documents", component: UserDocsComponent},
   {path: "queues", component: UserQueueComponent},
   {path: "shop", component: ShopComponent},
+  {path: "document", component: UserDockComponent},
+  {path: "shops", component: WhereICanBuyComponent},
   {path: "**", component: PageNotFoundComponent}
 
 ]
@@ -51,7 +55,9 @@ const appRoutes: Routes = [
     UserQueueComponent,
     UserDocsComponent,
     ShopComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    UserDockComponent,
+    WhereICanBuyComponent
   ],
   imports: [
     BrowserModule,

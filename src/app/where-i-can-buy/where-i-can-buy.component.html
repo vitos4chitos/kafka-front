@@ -1,0 +1,24 @@
+<div class = "header">
+  <button pButton type="button" id = "exit" label="Выйти" class="p-button-raised p-button-rounded p-button" (click)="logOut()"></button>
+</div>
+<div class = "headerr">
+  <button pButton type="button" id = "back" label="Назад" class="p-button-raised p-button-rounded p-button" (click)="back()"></button>
+</div>
+<div id="result_table">
+  <table align="center" id = "table">
+    <tr>
+      <th class="col1">Магазин</th>
+      <th class="col1">Количество</th>
+      <th class="col1">Время производства</th>
+      <th class="col1">Стоимость</th>
+      <th class="col1">Купить</th>
+    </tr>
+    <tr *ngFor="let point of rows">
+      <td class="col1">Bookkeeping {{point.id}}</td>
+      <td class="col1">{{point.quantity}}</td>
+      <td class="col1">{{point.time}}</td>
+      <td class="col1">{{point.cost}}</td>
+      <td class="columns"><button pButton type="button" label="Купить" class="p-button-raised p-button-rounded p-button" (click)="onClick(point.id)"></button></td>
+    </tr>
+  </table>
+</div>
