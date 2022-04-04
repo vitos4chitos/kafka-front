@@ -20,3 +20,17 @@ button{
 input:first-child{
   margin-top: 1em !important;
 }
+
+.info {
+  font-family:'Times New Roman', Times, serif;
+  font-weight:bold;
+  font-size:18px;
+  color: white;
+  font-style:normal;
+}
+
+.wrappInfo {
+  background-color: black;
+  display: inline-block;
+  border-radius: 5px;
+}
