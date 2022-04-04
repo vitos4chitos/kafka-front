@@ -15,6 +15,7 @@ import {map, Observable} from "rxjs";
 export class WhereICanBuyComponent implements OnInit {
   rows: Shop[] = [];
   url = "http://localhost:8080/bkp/getShops"
+  url2 = "http://localhost:8080/bkp/buy"
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
   ngOnInit(){
@@ -35,6 +36,22 @@ export class WhereICanBuyComponent implements OnInit {
   }
   onClick(id: number){
     console.log(id);
+    let params = new HttpParams().set("login", <string>localStorage.getItem("user")).set("bookkeepingId", id).set("name", <string>localStorage.getItem("type"));
+    this.http.get<any>(this.url2, {params: params}).subscribe(value => {
+      console.log(value);
+      if(value == 'true'){
+        localStorage.removeItem("type");
+        this.router.navigateByUrl("shop")
+      }
+      else{
+        alert("Не хватает средств")
+      }
+    },
+        error => {
+        console.log(error);
+        alert("Ошибка сервера, попробуйте позже")
+      });
+
   }
   back(){
     localStorage.removeItem("type")

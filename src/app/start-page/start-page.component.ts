@@ -11,6 +11,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class StartPageComponent implements OnInit {
   url_auth = "http://localhost:8080/user/check";
+  url_authO = "http://localhost:8080/authO";
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -20,9 +21,10 @@ export class StartPageComponent implements OnInit {
     let username;
     let user;
     let password;
-    if (localStorage.getItem("user") == undefined || localStorage.getItem("token") == undefined) {
+    if (localStorage.getItem("user") == undefined || localStorage.getItem("token") == undefined || localStorage.getItem("role") == undefined) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("role");
       this.router.navigateByUrl("auth");
     } else {
       username = localStorage.getItem("user");
@@ -31,21 +33,40 @@ export class StartPageComponent implements OnInit {
         login: username,
         password: password
       };
-      this.http.post(this.url_auth, user).subscribe(
-        (res: any) => {
-          if (res["token"] == "true") {
-            this.router.navigateByUrl("mainU");
+      if(localStorage.getItem("role") == "user") {
+        this.http.post(this.url_auth, user).subscribe(
+          (res: any) => {
+            if (res["token"] == "true") {
+              this.router.navigateByUrl("mainU");
+            } else {
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              localStorage.removeItem("role");
+              this.router.navigateByUrl("auth")
+            }
+          },
+          error => {
+            alert("Что-то не так с сервером, попробуйте позже")
           }
-          else{
-            this.router.navigateByUrl("auth")
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
+        );
+      }
+      else{
+        this.http.post(this.url_authO, user).subscribe(
+          (res: any) => {
+            if (res["token"] == "true") {
+              this.router.navigateByUrl("mainO");
+            } else {
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              localStorage.removeItem("role");
+              this.router.navigateByUrl("auth")
+            }
+          },
+          error => {
+            alert("Что-то не так с сервером, попробуйте позже")
           }
-        },
-        error => {
-          alert("Что-то не так с сервером, попробуйте позже")
-        }
-      );
+        );
+      }
     }
   }
 }

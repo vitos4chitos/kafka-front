@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 export class AuthService {
 
   url_auth = "http://localhost:8080/auth";
+  url_authO = "http://localhost:8080/authO";
   url_reg = "http://localhost:8080/signUp"
   url_dock = "http://localhost:8080/document/addDocument"
   url_prior = "http://localhost:8080/document/addDocumentPrior"
@@ -22,19 +23,36 @@ export class AuthService {
 
   login(user: User) {
     console.log(user.login)
-    this.http.post(this.url_auth, user).subscribe(
-      (res: any) => {
-        if (res["token"] !== "bad") {
-          localStorage.setItem('token', user.password);
-          localStorage.setItem('user', user.login);
-          this.router.navigateByUrl("mainU");
-        } else
-          alert("Неправильный логин или пароль");
-      },
-      error => {
-        alert("Что-то не так с сервером, попробуйте позже")
-      }
-    );
+    if(localStorage.getItem("role") == "user") {
+      this.http.post(this.url_auth, user).subscribe(
+        (res: any) => {
+          if (res["token"] !== "bad") {
+            localStorage.setItem('token', user.password);
+            localStorage.setItem('user', user.login);
+            this.router.navigateByUrl("mainU");
+          } else
+            alert("Неправильный логин или пароль");
+        },
+        error => {
+          alert("Что-то не так с сервером, попробуйте позже")
+        }
+      );
+    }
+    else{
+      this.http.post(this.url_authO, user).subscribe(
+        (res: any) => {
+          if (res["token"] !== "bad") {
+            localStorage.setItem('token', user.password);
+            localStorage.setItem('user', user.login);
+            this.router.navigateByUrl("mainO");
+          } else
+            alert("Неправильный логин или пароль");
+        },
+        error => {
+          alert("Что-то не так с сервером, попробуйте позже")
+        }
+      );
+    }
 
   }
 
@@ -111,9 +129,11 @@ export class AuthService {
     let username;
     let user;
     let password;
-    if (localStorage.getItem("user") == undefined || localStorage.getItem("token") == undefined) {
+    if (localStorage.getItem("user") == undefined || localStorage.getItem("token") == undefined || localStorage.getItem("role") == undefined ||
+      localStorage.getItem("role") != "user") {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("role");
       this.router.navigateByUrl("");
     } else {
       username = localStorage.getItem("user");
@@ -124,16 +144,61 @@ export class AuthService {
       };
       this.http.post(this.url_auth, user).subscribe(
         (res: any) => {
+          console.log(res["token"])
           if (res["token"] !== "true") {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            localStorage.removeItem("role");
             this.router.navigateByUrl("");
           }
         },
         error => {
-          alert("Что-то не так с сервером, попробуйте позже")
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          localStorage.removeItem("role");
+          this.router.navigateByUrl("");
         }
       );
     }
 
     }
+
+  checkTokenO(){
+    let username;
+    let user;
+    let password;
+    if (localStorage.getItem("user") == undefined || localStorage.getItem("token") == undefined || localStorage.getItem("role") == undefined ||
+      localStorage.getItem("role") != "admin") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("role");
+      this.router.navigateByUrl("");
+    } else {
+      username = localStorage.getItem("user");
+      password = localStorage.getItem("token");
+      user = {
+        login: username,
+        password: password
+      };
+      this.http.post(this.url_authO, user).subscribe(
+        (res: any) => {
+          console.log(res["token"])
+          if (res["token"] !== "true") {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            localStorage.removeItem("role");
+            this.router.navigateByUrl("");
+          }
+        },
+        error => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          localStorage.removeItem("role");
+          this.router.navigateByUrl("");
+        }
+      );
+    }
+
+  }
   }
 

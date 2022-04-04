@@ -19,6 +19,7 @@ export class AuthUserComponent implements OnInit {
 
   username: string;
   password: string;
+  log: string;
 
   user:{
     login: string;
@@ -35,8 +36,10 @@ export class AuthUserComponent implements OnInit {
   }
 
   onSubmit(data: string) {
+    // @ts-ignore
+    this.log = document.getElementById("tab");
+    console.log(this.activeItem);
     if(data === 'LogIn'){
-
       // @ts-ignore
       this.username = document.getElementById("email1").value;
       // @ts-ignore
@@ -45,13 +48,32 @@ export class AuthUserComponent implements OnInit {
         login: this.username,
         password: this.password
       };
-      this.mainServer.setCurrentUser(this.user.login);
-      localStorage.setItem("user", this.mainServer.currentUser);
-      console.log(this.user.login);
-      this.auth.login(this.user);
+      if(this.activeItem == this.items[0]){
+        this.mainServer.setCurrentUser(this.user.login);
+        localStorage.setItem("user", this.mainServer.currentUser);
+        localStorage.setItem("role", "user");
+        console.log(this.user.login);
+        this.auth.login(this.user);
+      }
+      else{
+        this.mainServer.setCurrentUser(this.user.login);
+        localStorage.setItem("user", this.mainServer.currentUser);
+        localStorage.setItem("role", "admin");
+        console.log(this.user.login);
+        this.auth.login(this.user);
+      }
     }
     else{
       this.router.navigateByUrl("registU");
+      localStorage.setItem("role", "user");
+    }
+  }
+  change(){
+    if(this.activeItem == this.items[0]){
+      this.activeItem = this.items[1];
+    }
+    else{
+      this.activeItem = this.items[0];
     }
   }
 }
