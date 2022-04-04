@@ -27,6 +27,7 @@ import {TableModule} from "primeng/table";
 import { UserDockComponent } from './user-dock/user-dock.component';
 import { WhereICanBuyComponent } from './where-i-can-buy/where-i-can-buy.component';
 import { MainOfficialPageComponent } from './main-official-page/main-official-page.component';
+import { FirstUserComponent } from './first-user/first-user.component';
 
 const appRoutes: Routes = [
   {path: "", component: StartPageComponent},
@@ -41,6 +42,8 @@ const appRoutes: Routes = [
   {path: "shop", component: ShopComponent},
   {path: "document", component: UserDockComponent},
   {path: "shops", component: WhereICanBuyComponent},
+  {path: "mainO", component: MainOfficialPageComponent},
+  {path: "firstUser", component: FirstUserComponent},
   {path: "**", component: PageNotFoundComponent}
 
 ]
@@ -59,7 +62,8 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     UserDockComponent,
     WhereICanBuyComponent,
-    MainOfficialPageComponent
+    MainOfficialPageComponent,
+    FirstUserComponent
   ],
   imports: [
     BrowserModule,

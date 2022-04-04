@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {UserDoc} from "../user-docs/user.doc";
 import {SortEvent} from "primeng/api";
+import {Customer} from "./customer";
+import {AuthService} from "../services/auth.serv";
+import {MainService} from "../services/main.serv";
+import {Router} from "@angular/router";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {map, Observable} from "rxjs";
 
 
 @Component({
@@ -15,10 +21,24 @@ export class MainOfficialPageComponent implements OnInit {
   //todo
   customers: Customer[] = [];
 
-  // constructor(private productService: ProductService) { }
+  url = "http://localhost:8080/queue/official"
+  constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
-    // this.productService.getProductsSmall().then(data => this.rows = data);
+    this.auth.checkTokenO()
+    this.getExistingValues(<string>localStorage.getItem("user")).subscribe(values => {
+      console.log(this.customers.toString());
+      this.customers = values;
+    });
+  }
+
+  getExistingValues(username: string): Observable<Customer[]> {
+    let params = new HttpParams().set("login", username);
+    return this.http.get<any>(this.url, {params: params}).pipe(map(points => points.map(function (point: any) {
+        console.log(point["issued_by_whom"]);
+        return new Customer(point["id"], point["name"], point["place"], point["prior"]);
+      }
+    )));
   }
 
   // customSort(event: SortEvent) {
@@ -44,10 +64,9 @@ export class MainOfficialPageComponent implements OnInit {
 
   //todo
   acceptCustomer() {
-
+    this.router.navigateByUrl("firstUser")
   }
-  //todo
   logOut() {
-
+    this.auth.logout();
   }
 }
