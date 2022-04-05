@@ -22,3 +22,7 @@ button{
   border: none;
   width: 100% !important;
 }
+
+.table_custom {
+  margin-top: 55px;
+}

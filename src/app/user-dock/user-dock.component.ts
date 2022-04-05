@@ -11,7 +11,7 @@ import {Doc} from "./document";
   styleUrls: ['./user-dock.component.css']
 })
 export class UserDockComponent implements OnInit {
-  rows: Doc;
+  rows: Doc[] = [];
   url = "http://localhost:8080/document/getDock"
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class UserDockComponent implements OnInit {
   getExistingValues(username: string){
     let params = new HttpParams().set("id", username);
     this.http.get<any>(this.url, {params: params}).subscribe(value => {
-      this.rows = new Doc(value["id"], value["name"], value["issue"], value["validity"], value["byWho"], value["lgot"], value["podtver"], value["pod"]);
+      this.rows[0] = new Doc(value["id"], value["name"], value["issue"], value["validity"], value["byWho"], value["lgot"], value["podtver"], value["pod"]);
     },
     error => {
       console.log(error);

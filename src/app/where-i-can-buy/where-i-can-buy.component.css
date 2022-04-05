@@ -20,3 +20,7 @@ button{
   border: none;
   width: 100% !important;
 }
+
+.custom_table {
+  margin-top: 55px;
+}
