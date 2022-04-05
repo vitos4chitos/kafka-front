@@ -28,6 +28,7 @@ import { UserDockComponent } from './user-dock/user-dock.component';
 import { WhereICanBuyComponent } from './where-i-can-buy/where-i-can-buy.component';
 import { MainOfficialPageComponent } from './main-official-page/main-official-page.component';
 import { FirstUserComponent } from './first-user/first-user.component';
+import { ToTheNextLvlComponent } from './to-the-next-lvl/to-the-next-lvl.component';
 
 const appRoutes: Routes = [
   {path: "", component: StartPageComponent},
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   {path: "shops", component: WhereICanBuyComponent},
   {path: "mainO", component: MainOfficialPageComponent},
   {path: "firstUser", component: FirstUserComponent},
+  {path: "nextLvl", component: ToTheNextLvlComponent},
   {path: "**", component: PageNotFoundComponent}
 
 ]
@@ -63,7 +65,8 @@ const appRoutes: Routes = [
     UserDockComponent,
     WhereICanBuyComponent,
     MainOfficialPageComponent,
-    FirstUserComponent
+    FirstUserComponent,
+    ToTheNextLvlComponent
   ],
   imports: [
     BrowserModule,

@@ -29,5 +29,8 @@ export class MainUPageComponent implements OnInit {
   toS(){
     this.router.navigateByUrl("shop")
   }
+  toL(){
+    this.router.navigateByUrl("nextLvl")
+  }
 
 }
