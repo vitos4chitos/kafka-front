@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {UserDoc} from "../user-docs/user.doc";
-import {SortEvent} from "primeng/api";
 import {Customer} from "./customer";
 import {AuthService} from "../services/auth.serv";
 import {MainService} from "../services/main.serv";
@@ -18,7 +16,6 @@ import {map, Observable} from "rxjs";
 
 export class MainOfficialPageComponent implements OnInit {
 
-  //todo
   customers: Customer[] = [];
 
   url = "http://localhost:8080/queue/official"
@@ -35,7 +32,7 @@ export class MainOfficialPageComponent implements OnInit {
   getExistingValues(username: string): Observable<Customer[]> {
     let params = new HttpParams().set("login", username);
     return this.http.get<any>(this.url, {params: params}).pipe(map(points => points.map(function (point: any) {
-        console.log(point["issued_by_whom"]);
+        console.log(point["id"]);
         return new Customer(point["id"], point["name"], point["place"], point["prior"]);
       }
     )));

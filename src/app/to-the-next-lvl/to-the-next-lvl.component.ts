@@ -15,6 +15,7 @@ export class ToTheNextLvlComponent implements OnInit {
 
   rows: UserNext[] = [];
   url = "http://localhost:8080/document/getAllReference"
+  url2 = "http://localhost:8080/document/addForReview"
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
   ngOnInit(){
@@ -36,6 +37,15 @@ export class ToTheNextLvlComponent implements OnInit {
   }
   onClick(id: number){
     console.log(id);
+    let params = new HttpParams().set("parameterId", id);
+    console.log("Я отправил запрос летс гоу");
+    this.http.get<any>(this.url2, {params: params}).subscribe(value => {
+        alert("Успешно добавлен");
+      },
+      error => {
+      alert("Уже добавлен, или не хватает подписей, или всё занято")
+      }
+    );
   }
 
   back(){
