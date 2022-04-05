@@ -19,7 +19,7 @@ import {map, Observable} from "rxjs";
 export class MainOfficialPageComponent implements OnInit {
 
   //todo
-  //customers: Customer[] = [];
+  customers: Customer[] = [];
 
   url = "http://localhost:8080/queue/official"
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
