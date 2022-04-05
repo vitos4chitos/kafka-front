@@ -1,16 +1,32 @@
 <div class = "header">
   <button pButton type="button" id = "exit" label="Выйти" class="p-button-raised p-button-rounded p-button" (click)="logOut()"></button>
 </div>
-<div class = "headerr">
+<div class = "headerr2">
   <button pButton type="button" id = "back" label="Назад" class="p-button-raised p-button-rounded p-button" (click)="back()"></button>
 </div>
-<div id="result_table">
-  <p>Id: {{rows.id}}</p>
-  <p>Имя: {{rows.name}}</p>
-  <p>Фамилия: {{rows.surname}}</p>
-  <p>Документ: {{rows.nameOfDocument}}</p>
 
-</div>
-<div class = "headerr">
-  <button pButton type="button" id = "obs" label="Обслужить" class="p-button-raised p-button-rounded p-button" (click)="onClick(rows.id)"></button>
+<div id="result_table" class = "table_user">
+<!--  <p>Id: {{rows.id}}</p>-->
+<!--  <p>Имя: {{rows.name}}</p>-->
+<!--  <p>Фамилия: {{rows.surname}}</p>-->
+<!--  <p>Документ: {{rows.nameOfDocument}}</p>-->
+  <p-table [value]="rows" responsiveLayout="scroll" >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id: </th>
+        <th>Имя </th>
+        <th>Фамилия </th>
+        <th>Название документа </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.surname}}</td>
+        <td>{{product.nameOfDocument}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+    <button pButton type="button" id = "obs" label="Обслужить" class="p-button-raised p-button-rounded p-button" (click)="onClick(rows[0].id)"></button>
 </div>

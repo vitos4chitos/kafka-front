@@ -11,7 +11,7 @@
 
 .headerr{
   position: absolute;
-  left: 1%;
+  left: 65%;
   top: 1%;
 }
 
@@ -21,4 +21,16 @@ button{
   margin-bottom: 1em !important;
   border: none;
   width: 100% !important;
+}
+
+.table_user {
+  background-color: white;
+  display: inline-block;
+  margin-left: 35%;
+  margin-right: auto;
+}
+.headerr2 {
+  position: absolute;
+  left: 1%;
+  top: 1%;
 }

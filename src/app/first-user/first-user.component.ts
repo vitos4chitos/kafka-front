@@ -11,7 +11,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
   styleUrls: ['./first-user.component.css']
 })
 export class FirstUserComponent implements OnInit {
-  rows: FirstUser;
+  rows: FirstUser[] = [];
   url = "http://localhost:8080/queue/firstUser"
   url2 = "http://localhost:8080/signatures/makeSign"
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
@@ -24,7 +24,7 @@ export class FirstUserComponent implements OnInit {
   getExistingValues(username: string){
     let params = new HttpParams().set("login", username);
     this.http.get<any>(this.url, {params: params}).subscribe(value => {
-        this.rows = new FirstUser(value["id"], value["name"], value["surname"], value["dockname"]);
+        this.rows[0] = new FirstUser(value["id"], value["name"], value["surname"], value["dockname"]);
       },
       error => {
         console.log(error);
