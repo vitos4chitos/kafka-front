@@ -39,7 +39,7 @@ export class WhereICanBuyComponent implements OnInit {
     let params = new HttpParams().set("login", <string>localStorage.getItem("user")).set("bookkeepingId", id).set("name", <string>localStorage.getItem("type"));
     this.http.get<any>(this.url2, {params: params}).subscribe(value => {
       console.log(value);
-      if(value == 'true'){
+      if(value == true){
         localStorage.removeItem("type");
         this.router.navigateByUrl("shop")
       }

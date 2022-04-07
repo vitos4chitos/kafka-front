@@ -16,6 +16,7 @@ export class ToTheNextLvlComponent implements OnInit {
   rows: UserNext[] = [];
   url = "http://localhost:8080/document/getAllReference"
   url2 = "http://localhost:8080/document/addForReview"
+  url_lvl = "http://localhost:8080/instance/nextLevel"
   constructor(private auth: AuthService, private mainServer: MainService, private router: Router, private http: HttpClient) { }
 
   ngOnInit(){
@@ -57,6 +58,20 @@ export class ToTheNextLvlComponent implements OnInit {
   }
 
   nextLvl(){
+    let params = new HttpParams().set("login", <string>localStorage.getItem("user"));
+    console.log("Я отправил запрос летс гоу");
+    this.http.get<any>(this.url_lvl, {params: params}).subscribe(value => {
+        if(value["token"] === "true"){
+          this.router.navigateByUrl("mainU")
+        }
+        else{
+          alert("Пока не можем этого сделать")
+        }
+      },
+      error => {
+        alert("Попробуйте позже")
+      }
+    );
     console.log("next")
   }
 
